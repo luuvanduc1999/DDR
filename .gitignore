@@ -29,20 +29,22 @@ db.sqlite3-journal
 media/
 staticfiles/
 
-# Environment variables
-.env
-.env.dev
-.env.prod
-.env.prod.db
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
+# Environment variables - Project specific
+# .env
+# .env.*
+# docker/dev/.env.dev
+# docker/prod/.env.prod
+# docker/prod/.env.prod.db
+# .venv
+# env/
+# venv/
+# ENV/
+# env.bak/
+# venv.bak/
 
 # Docker
 docker-compose.override.yml
+**/docker-compose.override.yml
 
 # VS Code
 .vscode/
@@ -58,11 +60,15 @@ docker-compose.override.yml
 # Database
 *.sqlite3
 *.db
+*.postgresql
+*.psql
 
 # Static files
 static/
 media/
 assets/
+!app/static/
+!app/media/
 
 # Logs
 logs/
@@ -73,8 +79,9 @@ logs/
 Thumbs.db
 *.swp
 *.swo
+*~
 
-# Coverage
+# Coverage and testing
 htmlcov/
 .tox/
 .nox/
@@ -93,24 +100,15 @@ cover/
 *.mo
 *.pot
 
-# Django stuff:
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-
 # Celery
 celerybeat-schedule
 celerybeat.pid
-
-# Unit test / coverage reports
-.coverage
-.coverage.*
-coverage.xml
-*.cover
-.pytest_cache/
 
 # Backup files
 *.bak
 *.tmp
 *~
+
+# Local development
+local_settings.py
+*.local

@@ -3,17 +3,29 @@ version: '3.8'
 services:
   web:
     build:
-      context: ../../app
+      context: ../../backend
       dockerfile: Dockerfile.dev
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ../../app:/usr/src/app/
+      - ../../backend:/usr/src/app/
     ports:
       - "8000:8000"
     env_file:
       - .env.dev
     depends_on:
       - db
+  
+  frontend:
+    build:
+      context: ../../frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ../../frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8000/api
   
   db:
     image: postgres:13
