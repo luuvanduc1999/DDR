@@ -1,5 +1,44 @@
 # Docker-Django-React Project
 
+## Project Structure
+
+```
+├── backend/                 # Django backend application
+│   ├── Dockerfile          # Base Dockerfile for Django
+│   ├── Dockerfile.dev      # Development environment Dockerfile
+│   ├── Dockerfile.prod     # Production environment Dockerfile
+│   ├── manage.py          # Django management script
+│   ├── requirements.txt    # Python dependencies
+│   └── core/              # Main Django application
+│       ├── __init__.py
+│       ├── asgi.py        # ASGI configuration
+│       ├── models.py      # Database models
+│       ├── serializers.py # API serializers
+│       ├── settings.py    # Django settings
+│       ├── urls.py        # URL routing
+│       └── wsgi.py        # WSGI configuration
+│
+├── docker/                 # Docker configuration files
+│   ├── dev/               # Development environment
+│   │   └── docker-compose.yml
+│   └── prod/              # Production environment
+│       ├── docker-compose.yml
+│       └── nginx/         # Nginx configuration for production
+│           ├── Dockerfile
+│           └── nginx.conf
+│
+└── frontend/              # React frontend application
+    ├── Dockerfile.dev     # Development environment Dockerfile
+    ├── Dockerfile.prod    # Production environment Dockerfile
+    ├── nginx.conf        # Nginx configuration for frontend
+    ├── package.json      # Node.js dependencies
+    ├── public/           # Static files
+    └── src/              # React source code
+        ├── App.js        # Main React component
+        ├── components/    # React components
+        └── services/     # API services
+```
+
 ## First Time Docker Setup
 
 ### Prerequisites
@@ -113,26 +152,7 @@ docker-compose logs [service_name]  # e.g., docker-compose logs web
 docker-compose up --build
 ```
 
-### Project Structure
 
-```
-backend/           # Django backend
-├── Dockerfile.dev  # Development Dockerfile
-├── Dockerfile.prod # Production Dockerfile
-└── ...
-
-frontend/          # React frontend
-├── Dockerfile.dev
-├── Dockerfile.prod
-└── ...
-
-docker/
-├── dev/           # Development Docker configuration
-│   └── docker-compose.yml
-└── prod/          # Production Docker configuration
-    ├── docker-compose.yml
-    └── nginx/     # Nginx configuration for production
-```
 
 ### Database Management Commands
 
