@@ -11,7 +11,6 @@
 1. Clone the repository (if you haven't already):
 ```bash
 git clone <your-repository-url>
-cd Django-CFS
 ```
 
 2. Build and start the development environment:

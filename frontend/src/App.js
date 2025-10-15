@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Django-CFS</h1>
+        <h1>Admin Site</h1>
       </header>
       <main>
         {!isAuthenticated ? (
