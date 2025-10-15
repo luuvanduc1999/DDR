@@ -1,4 +1,4 @@
-# Django-CFS Project
+# Docker-Django-React Project
 
 ## First Time Docker Setup
 
