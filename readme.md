@@ -9,34 +9,67 @@
 │   ├── Dockerfile.prod    # Production environment Dockerfile
 │   ├── manage.py          # Django management script
 │   ├── requirements.txt   # Python dependencies
-│   └── core/              # Main Django application
-│       ├── __init__.py
-│       ├── asgi.py        # ASGI configuration
-│       ├── models.py      # Database models
-│       ├── serializers.py # API serializers
-│       ├── settings.py    # Django settings
-│       ├── urls.py        # URL routing
-│       └── wsgi.py        # WSGI configuration
+│   ├── config/            # Project configuration
+│   │   ├── __init__.py
+│   │   ├── asgi.py        # ASGI configuration
+│   │   ├── settings.py    # Django settings
+│   │   ├── urls.py        # Main URL routing
+│   │   └── wsgi.py        # WSGI configuration
+│   ├── core/              # Core applications
+│   │   ├── __init__.py
+│   │   ├── books/         # Books application
+│   │   │   ├── __init__.py
+│   │   │   ├── models.py
+│   │   │   ├── serializers.py
+│   │   │   ├── urls.py
+│   │   │   └── views.py
+│   │   └── users/         # Users application
+│   │       ├── __init__.py
+│   │       ├── admin.py
+│   │       ├── managers.py
+│   │       ├── models.py
+│   │       ├── permissions.py
+│   │       ├── selectors.py
+│   │       ├── serializers.py
+│   │       ├── services.py
+│   │       ├── urls.py
+│   │       └── views.py
+│   └── logs/             # Application logs
 │
-├── docker/                # Docker configuration files
-│   ├── dev/               # Development environment
+├── docker/               # Docker configuration files
+│   ├── dev/              # Development environment
 │   │   └── docker-compose.yml
-│   └── prod/              # Production environment
+│   └── prod/             # Production environment
 │       ├── docker-compose.yml
-│       └── nginx/         # Nginx configuration for production
+│       └── nginx/        # Nginx configuration for production
 │           ├── Dockerfile
 │           └── nginx.conf
 │
-└── frontend/              # React frontend application
-    ├── Dockerfile.dev     # Development environment Dockerfile
-    ├── Dockerfile.prod    # Production environment Dockerfile
-    ├── nginx.conf         # Nginx configuration for frontend
-    ├── package.json       # Node.js dependencies
-    ├── public/            # Static files
-    └── src/               # React source code
-        ├── App.js         # Main React component
-        ├── components/    # React components
-        └── services/      # API services
+├── frontend/             # React frontend application
+│   ├── Dockerfile.dev    # Development environment Dockerfile
+│   ├── Dockerfile.prod   # Production environment Dockerfile
+│   ├── nginx.conf        # Nginx configuration for frontend
+│   ├── package.json      # Node.js dependencies
+│   ├── public/           # Static files
+│   │   ├── index.html
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   └── src/             # React source code
+│       ├── App.css
+│       ├── App.js       # Main React component
+│       ├── App.test.js
+│       ├── index.css
+│       ├── index.js
+│       ├── components/  # React components
+│       │   ├── Login.js
+│       │   └── UserProfile.js
+│       └── services/    # API services
+│           └── authService.js
+│
+└── scripts/             # Utility scripts
+    ├── backup_db.ps1    # PowerShell database backup script
+    ├── backup_db.sh     # Shell database backup script
+    └── renew-ssl.sh     # SSL certificate renewal script
 ```
 
 ## First Time Docker Setup
