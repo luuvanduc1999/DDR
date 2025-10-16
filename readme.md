@@ -3,12 +3,12 @@
 ## Project Structure
 
 ```
-├── backend/                 # Django backend application
-│   ├── Dockerfile          # Base Dockerfile for Django
-│   ├── Dockerfile.dev      # Development environment Dockerfile
-│   ├── Dockerfile.prod     # Production environment Dockerfile
+├── backend/               # Django backend application
+│   ├── Dockerfile         # Base Dockerfile for Django
+│   ├── Dockerfile.dev     # Development environment Dockerfile
+│   ├── Dockerfile.prod    # Production environment Dockerfile
 │   ├── manage.py          # Django management script
-│   ├── requirements.txt    # Python dependencies
+│   ├── requirements.txt   # Python dependencies
 │   └── core/              # Main Django application
 │       ├── __init__.py
 │       ├── asgi.py        # ASGI configuration
@@ -18,7 +18,7 @@
 │       ├── urls.py        # URL routing
 │       └── wsgi.py        # WSGI configuration
 │
-├── docker/                 # Docker configuration files
+├── docker/                # Docker configuration files
 │   ├── dev/               # Development environment
 │   │   └── docker-compose.yml
 │   └── prod/              # Production environment
@@ -30,13 +30,13 @@
 └── frontend/              # React frontend application
     ├── Dockerfile.dev     # Development environment Dockerfile
     ├── Dockerfile.prod    # Production environment Dockerfile
-    ├── nginx.conf        # Nginx configuration for frontend
-    ├── package.json      # Node.js dependencies
-    ├── public/           # Static files
-    └── src/              # React source code
-        ├── App.js        # Main React component
+    ├── nginx.conf         # Nginx configuration for frontend
+    ├── package.json       # Node.js dependencies
+    ├── public/            # Static files
+    └── src/               # React source code
+        ├── App.js         # Main React component
         ├── components/    # React components
-        └── services/     # API services
+        └── services/      # API services
 ```
 
 ## First Time Docker Setup
@@ -103,6 +103,7 @@ docker-compose up --build
 ```bash
 # In a new terminal window
 docker-compose exec web python manage.py migrate
+docker-compose exec web python manage.py makemigrations
 ```
 
 4. Create a superuser for production admin access:
