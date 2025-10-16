@@ -87,6 +87,14 @@ DATABASES = {
         'PASSWORD': os.environ.get('SQL_PASSWORD', 'postgres'),
         'HOST': os.environ.get('SQL_HOST', 'db'),
         'PORT': os.environ.get('SQL_PORT', '5432'),
+        # Connection Pool Settings
+        'CONN_MAX_AGE': 60,  # Keep connections alive for 60 seconds
+        'OPTIONS': {
+            'keepalives': 1,
+            'keepalives_idle': 30,
+            'keepalives_interval': 10,
+            'keepalives_count': 5,
+        }
     }
 }
 

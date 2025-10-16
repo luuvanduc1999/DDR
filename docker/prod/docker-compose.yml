@@ -5,7 +5,17 @@ services:
     build:
       context: ../../backend
       dockerfile: Dockerfile.prod
-    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    command: >
+      gunicorn core.wsgi:application 
+      --bind 0.0.0.0:8000
+      --workers 4
+      --threads 2
+      --worker-class=gthread
+      --worker-tmp-dir=/dev/shm
+      --max-requests 1000
+      --max-requests-jitter 50
+      --timeout 30
+      --keep-alive 5
     volumes:
       - static_volume:/usr/src/app/staticfiles
       - media_volume:/usr/src/app/mediafiles
@@ -15,6 +25,7 @@ services:
       - .env.prod
     depends_on:
       - db
+    restart: unless-stopped
 
   frontend:
     build:
@@ -24,6 +35,7 @@ services:
         - REACT_APP_API_URL=/api
     expose:
       - 80
+    restart: unless-stopped
 
   db:
     image: postgres:13
@@ -31,6 +43,7 @@ services:
       - postgres_data_prod:/var/lib/postgresql/data/
     env_file:
       - .env.prod.db
+    restart: unless-stopped
 
   nginx:
     build: ./nginx
