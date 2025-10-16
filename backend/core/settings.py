@@ -189,3 +189,70 @@ CORS_ALLOW_HEADERS = [
 ]
 
 CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
+
+# Logging Configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'verbose',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler',
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'django.request': {
+            'handlers': ['mail_admins', 'file'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+        'core': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': True,
+        },
+    }
+}
+
+# Create logs directory if it doesn't exist
+if not os.path.exists(os.path.join(BASE_DIR, 'logs')):
+    os.makedirs(os.path.join(BASE_DIR, 'logs'))
